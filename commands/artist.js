@@ -3,7 +3,6 @@ module.exports = {
   description: 'Artist name',
   execute(msg, args) {
 	
-	console.log('artist')
 	var SpotifyWebApi = require('spotify-web-api-node');
 
 const artistName = args[0]
@@ -13,7 +12,7 @@ const spotifyApi = new SpotifyWebApi({
   clientSecret: '9c960d552f96484686e5ae4c5aa03961'
 });
 
-	
+
 	// Retrieve an access token
 spotifyApi
   .clientCredentialsGrant()
@@ -27,12 +26,13 @@ spotifyApi
 
   })
   .then(function(data) {
-
-	console.log(data)
    
     data.body.tracks.items.forEach(function(track, index) {
     
-	    msg.channel.send('-p '+track.name);
+	    setTimeout(function(){
+            msg.channel.send('-p '+track.name)
+        }, index * 4000);
+		
 
 	  
     });
